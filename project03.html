@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Matching Game</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .card {
+            width: 100px;
+            height: 150px;
+            background-color: #ccc;
+            display: inline-block;
+            margin: 10px;
+            text-align: center;
+            line-height: 150px;
+            font-size: 24px;
+            cursor: pointer;
+            transition: transform 0.5s;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+        .card::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            backface-visibility: hidden;
+            background-color: #fff;
+            transform: rotateY(180deg);
+        }
+        .card.flip::before {
+            content: attr(data-card);
+        }
+        .card.flip {
+            background-color: #fff;
+            transform: rotateY(180deg);
+        }
+        .card[data-card="1"]::before { content: "A"; }
+        .card[data-card="2"]::before { content: "B"; }
+        .card[data-card="3"]::before { content: "C"; }
+        .card[data-card="4"]::before { content: "D"; }
+        .card[data-card="5"]::before { content: "E"; }
+        .card[data-card="6"]::before { content: "F"; }
+        .card::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            backface-visibility: hidden;
+        }
+        .card.flip::before {
+            content: attr(data-card);
+        }
+        .card.flip {
+            background-color: #fff;
+            transform: rotateY(180deg);
+        }
+        .card[data-card="1"]::before { content: "A"; }
+        .card[data-card="2"]::before { content: "B"; }
+        .card[data-card="3"]::before { content: "C"; }
+        .card[data-card="4"]::before { content: "D"; }
+        .card[data-card="5"]::before { content: "E"; }
+        .card[data-card="6"]::before { content: "F"; }
+    </style>
+</head>
+<body>
+    <h1>Memory Matching Game</h1>
+    <div id="game-board">
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const gameBoard = document.getElementById("game-board");
+                const restartButton = document.getElementById("restart-button");
+
+                function shuffleCards() {
+                    const cards = Array.from(gameBoard.children);
+                    for (let i = cards.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        gameBoard.appendChild(cards[j]);
+                    }
+                }
+
+                restartButton.addEventListener("click", function() {
+                    shuffleCards();
+                });
+
+                shuffleCards();
+            });
+        </script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const gameBoard = document.getElementById("game-board");
+                const cards = Array.from(gameBoard.children);
+                for (let i = cards.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    gameBoard.appendChild(cards[j]);
+                }
+            });
+        </script>
+        <!-- Add card elements here -->
+        <div class="card" data-card="1"></div>
+        <div class="card" data-card="1"></div>
+        <div class="card" data-card="2"></div>
+        <div class="card" data-card="2"></div>
+        <div class="card" data-card="3"></div>
+        <div class="card" data-card="3"></div>
+        <div class="card" data-card="4"></div>
+        <div class="card" data-card="4"></div>
+        <div class="card" data-card="5"></div>
+        <div class="card" data-card="5"></div>
+        <div class="card" data-card="6"></div>
+        <div class="card" data-card="6"></div>
+    </div>
+    <div id="info">
+        <p>Moves: <span id="move-count">0</span></p>
+        <p>Time: <span id="timer">0</span> seconds</p>
+        <button id="restart-button">Restart Game</button>
+    </div>
+    <script src="js/project03.js"></script>
+</body>
+</html>
